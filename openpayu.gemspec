@@ -1,12 +1,12 @@
 Gem::Specification.new do |s|
   s.name        = 'openpayu'
-  s.version     = '0.0.1'
-  s.date        = '2013-07-12'
+  s.version     = '0.0.2'
+  s.date        = DateTime.now
   s.summary     = "openpayu"
-  s.description = "openpayu gem based on PayU beta code"
-  s.authors     = ["Wojciech Baran"]
-  s.email       = 'wojciech.baran@goodylabs.com'
+  s.description = "Fixes on the forked gem by Wojciech Baran"
+  s.authors     = ["kkosman"]
+  s.email       = 'krzysztof@1000i.pl'
   s.require_path = 'lib'
   s.homepage    =
-    'https://github.com/goodylabs/openpayu_ruby'
+    'https://github.com/1000ideas/openpayu_ruby'
 end

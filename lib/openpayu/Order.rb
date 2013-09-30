@@ -1,4 +1,4 @@
-require 'openssl'
+begin ; require 'OpenSSL' ; rescue LoadError ; require 'openssl' ; end
 require 'time'
 module OpenPayU
 
@@ -42,6 +42,7 @@ class Order
 		result.response = response
 		result.respHash = hashData
 		if (status["StatusCode"] == "OPENPAYU_SUCCESS") then 
+			result.sessionId = hashData['OpenPayU']['OrderDomainResponse']["OrderCreateResponse"]['SessionId']
 			result.success = true
 		else
 			result.success = false
@@ -73,8 +74,7 @@ class Order
 	##  IN: String (XML)
 	##  OUT: OpenPayU::Result
 	def self.consumeNotification(xml)
-			hashData = OpenPayU.makeMeHashTable(xml, 'XML')
-			hashData = hashData[1]
+			hashData = OpenPayU.makeMeHashTable(xml, 'XML').last
 			return OpenPayU::Order.consumeNotificationData(xml, hashData)
 	end
 

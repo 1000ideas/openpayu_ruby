@@ -1,4 +1,4 @@
-require 'openssl'
+begin ; require 'OpenSSL' ; rescue LoadError ; require 'openssl' ; end
 require 'net/http'
 require 'net/https'
 require 'cgi'

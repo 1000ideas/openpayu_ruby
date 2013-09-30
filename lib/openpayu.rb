@@ -5,6 +5,8 @@ require 'openpayu/Network'
 require 'openpayu/OAuth'
 require 'openpayu/ResultOAuth'
 require 'openpayu/Result'
+require 'openpayu/Item'
+require 'openpayu/Cart'
 
 
 module OpenPayU
@@ -61,7 +63,8 @@ module OpenPayU
 	 #  OUT: Array = [nil, Hash]
 	def self.makeMeHashTable(str, mod ="")
 		if mod == "XML" then
-			str.gsub!(str.match(/<\?xml(.*?)\?>/m)[0],"")
+			xmlhead = str[/(<\?xml(?:.*?)\?>)/m, 1]
+			str.gsub!(xmlhead, "") if xmlhead
 		end
 		hashData = Hash.new
 		while not nil do
@@ -175,7 +178,7 @@ module OpenPayU
 	 #  IN: Hash, String  
 	 #  OUT: Hash  
 	def self.verifyResponse(hashData, message)
-		if hashData['OpenPayU']['OrderDomainResponse'][message]!= nil then
+		if hashData['OpenPayU'].has_key?('OrderDomainResponse') && hashData['OpenPayU']['OrderDomainResponse'].has_key?(message)
 			status = hashData['OpenPayU']['OrderDomainResponse'][message]['Status']
 		else
 			status = hashData['OpenPayU']['HeaderResponse']['Status']
