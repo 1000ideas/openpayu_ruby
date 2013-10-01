@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name        = 'openpayu'
-  s.version     = '0.0.2'
+  s.version     = '0.0.3'
   s.summary     = "openpayu"
   s.description = "Fixes on the forked gem by Wojciech Baran"
   s.authors     = ["kkosman"]
