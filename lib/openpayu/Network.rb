@@ -60,10 +60,7 @@ class Network
 			shortDoc = OpenSSL::Digest.hexdigest("sha256", doc+signatureKey.to_s)
 		end
 		headers = {
-			"OpenPayu-Signature: sender" => merchantPosId.to_s,
-			"signature" => shortDoc,
-			"algorithm" => algorithm,
-			"content" => "DOCUMENT"
+			"OpenPayu-Signature" => "sender=#{merchantPosId.to_s};signature=#{shortDoc};algorithm=#{algorithm};content=DOCUMENT"
 			}
 		toSend = CGI::escape("#{doc}")
 		return OpenPayU::Network.sendDataAuth("DOCUMENT="+toSend, urlPath, headers)

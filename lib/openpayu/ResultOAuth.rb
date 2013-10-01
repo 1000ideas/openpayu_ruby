@@ -1,3 +1,6 @@
+require 'rubygems'
+require 'json'
+
 module OpenPayU
 =begin
 	ver 0.1.0
@@ -32,10 +35,9 @@ class ResultOAuth
 	## method parsing json string and supplementing attributes with data
 	##  IN: String
 	def evalJson(str)
-		str.gsub!("\": ","\" => ")
 		begin
-			str = eval str
-		rescue SyntaxError
+			str = JSON.parse(str)
+		rescue
 			print "unexpected data in json response"
 		end
 
